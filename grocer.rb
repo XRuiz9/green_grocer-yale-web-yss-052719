@@ -1,9 +1,31 @@
+require 'pry'
 def consolidate_cart(cart)
-  # code here
+  concart = {}
+  cart.each do |item|
+    item.each do |name, info|
+      if concart.keys.include?(name)
+        concart[name][:count] += 1
+      else
+        item[name][:count] = 1
+        concart[name] = item[name]
+      end
+    end
+  end
+  concart
 end
 
 def apply_coupons(cart, coupons)
-  # code here
+  coupcart = {}
+  newItem = ""
+  cart.each do |item, info|
+    coupcart[item] = info
+    coupons.each do |key, value|
+      if key == :item && item == value
+        newItem = item + "W/COUPON"
+      end
+    end
+  end
+  binding.pry
 end
 
 def apply_clearance(cart)
